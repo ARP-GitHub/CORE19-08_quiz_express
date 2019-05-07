@@ -129,6 +129,7 @@ describe("CORE19-08_quiz_express", function () {
     });
 
     it('', async function () {
+        const expected = "bin/www";
         this.name = `6: Launching the server...`;
         this.score = 1;
         if (error_critical) {
@@ -137,7 +138,7 @@ describe("CORE19-08_quiz_express", function () {
         } else {
             this.msg_ok = `'The server has been launched correctly`;
             this.msg_err = `Error running 'node bin/www'`;
-            server = spawn("node", ["bin/www"], {cwd: path_assignment});
+            server = spawn("node", [expected], {cwd: path_assignment});
             let error_launch = "";
             server.on('error', function (data) {
                 error_launch += data
@@ -148,7 +149,7 @@ describe("CORE19-08_quiz_express", function () {
                 }
             });
             await to(timeout(T_WAIT * 1000));
-            this.msg_err = `Error running 'node bin/www'\n\t\t\tReceived: ${error_launch}`;
+            this.msg_err = `Error launching '${expected}': ${error_launch.trim()}`;
             if (error_launch.length) {
                 error_critical = this.msg_err;
                 should.not.exist(error_critical);
