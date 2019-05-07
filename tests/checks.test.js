@@ -149,7 +149,7 @@ describe("CORE19-08_quiz_express", function () {
                 }
             });
             await to(timeout(T_WAIT * 1000));
-            this.msg_err = `Error launching '${expected}': ${error_launch.trim()}`;
+            this.msg_err = `Error launching '${expected}': ${error_launch.replace(/\n. |\r/g, " ").trim()}`;
             if (error_launch.length) {
                 error_critical = this.msg_err;
                 should.not.exist(error_critical);
